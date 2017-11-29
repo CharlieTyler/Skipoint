@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'pacificoregular';
-    src: url('pacifico-webfont.woff2') format('woff2'),
-         url('pacifico-webfont.woff') format('woff');
+    src: font_url('pacifico-webfont.woff2') format('woff2'),
+         font_url('pacifico-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
