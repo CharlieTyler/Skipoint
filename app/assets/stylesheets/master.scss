@@ -70,6 +70,13 @@ blockquote p {
   padding: 2px 8px 2px 8px;
 }
 
+img .place-img {
+  display: block;
+  border-radius: 5px;
+  max-width: 100%;
+  height: auto;
+}
+
 #map {
   height: 300px;
 }

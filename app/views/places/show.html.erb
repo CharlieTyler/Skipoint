@@ -5,8 +5,24 @@
   <br />
   <p><%= @place.description %></p>
 
+  <h2>Photos of <%= @place.name %></h2>
+  <div class="row">
+    <% @place.photos.each do |photo| %>
+      <div class="col-sm-6">
+        <div class="card w-100">
+          <%= image_tag photo.picture, class: 'card-img-top' %>
+          <div class="card-body">
+            <%= photo.caption %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <br />
+
   <% if @place.latitude.present? && @place.longitude.present? %>
-    
+    <h2>Location of <%= @place.name %></h2>
   <script>
 
       function initMap() {
@@ -101,7 +117,8 @@
 
 <div class="clear"></div>
 
-<%= simple_form_for @photo, url: '#' do |f| %>
+<%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+  <%= f.input :picture %>
   <%= f.input :caption %>
   <%= f.submit "Add Photo", class: 'btn btn-info' %>
 <% end %>
