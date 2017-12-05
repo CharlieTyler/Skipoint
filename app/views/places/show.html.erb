@@ -53,8 +53,9 @@
 
   <div class="float-right">
     <% if current_user && current_user == @place.user %>
+      <%= link_to 'Add Photos', '#PhotoModal', 'data-toggle' => 'modal', class: 'btn btn-info' %>
       <%= link_to 'Edit', edit_place_path(@place), class: 'btn btn-primary' %>
-      <%= link_to 'Delete', place_path(@place), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+      <%= link_to 'Delete', place_path(@place), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>       
     <% end %>
   </div>
   <br />
@@ -63,11 +64,7 @@
 
 <div class="clear"></div>
 
-
-
-
-
-<!-- Modal -->
+<!-- Comment Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -85,6 +82,30 @@
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <%= f.submit "Submit review", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- PhotoModal -->
+<div class="modal fade" id="PhotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add a Photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+        <div class="modal-body">
+          <%= f.input :picture %>
+          <%= f.input :caption %>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= f.submit "Add Photo", class: 'btn btn-info' %>
         </div>
       <% end %>
     </div>
@@ -114,11 +135,3 @@
     <% end %>
   </div>
 </div>
-
-<div class="clear"></div>
-
-<%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
-  <%= f.input :picture %>
-  <%= f.input :caption %>
-  <%= f.submit "Add Photo", class: 'btn btn-info' %>
-<% end %>
