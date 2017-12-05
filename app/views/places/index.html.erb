@@ -1,36 +1,41 @@
-<% @places.each do |place| %>
-  
-  <div class="booyah-box col-10 offset-1">
-    <h1><%= link_to place.name, place_path(place) %></h1>
-
-    <i><%= place.address %></i>
-    <br />    
-    <br />
-    <p><%= place.description %></p>
-
-    <% if place.user.present? %>
-      <small><%= place.user.email %></small>
-    <% end %>
-    <% if place.comments.present? %>
-      <div class="col-12">
-        <blockquote>
-          <% if place.comments.last.humanized_rating.present? %>
-            <b><%= place.comments.last.humanized_rating %></b><br />
-          <% end %>
-          <%= place.comments.last.message %><br />
-          <small>User - <%= place.comments.last.user.email %></small><br />
-        </blockquote>
+<div class="col-10 offset-1">
+    <% @places.each do |place| %>
+      <div class="card mb-3">
+        <div class="card-header">
+          <h2 class=""><%= link_to place.name, place_path(place) %></h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <% if place.photos.last.present? %>
+              <div class="col-4">
+                <%= image_tag place.photos.last.picture, class: 'rounded index-img' %>
+              </div>
+            <% end %>
+          <div class="col-8">           
+            <i class="card-text"><%= place.address %></i>
+            <br />
+            <br />
+            <h5 class="card-text"><%= place.description %></h5>
+            <% if place.user.present? %>
+              <p class="card-text"><small class="text-muted"><%= place.user.email %></small></p>
+            <% end %>
+            <% if place.comments.present? %>
+            <div class="col-12">
+              <blockquote>
+                <% if place.comments.last.humanized_rating.present? %>
+                  <b><%= place.comments.last.humanized_rating %></b><br />
+                <% end %>
+                <%= place.comments.last.message %><br />
+                <small><%= place.comments.last.user.email %></small><br />
+              </blockquote>
+            </div>
+          <% end %>  
+            </div>
+          </div>
+        </div>
       </div>
     <% end %>
-
-    <% if place.photos.last.present? %>
-
-          <%= image_tag place.photos.last.picture %>
-
-    <% end %>
-
   </div>
 
-<% end %>
 
 <%= will_paginate @places, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
