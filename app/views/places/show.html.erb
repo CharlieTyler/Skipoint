@@ -5,19 +5,22 @@
   <br />
   <p><%= @place.description %></p>
 
-  
-  <% @place.photos.each do |photo| %>  
-  <h2>Photos of <%= @place.name %></h2>
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="card w-100">
-        <%= image_tag photo.picture, class: 'card-img-top' %>
-        <div class="card-body">
-          <%= photo.caption %>
+  <% if @place.photos.present? %>
+    <h2>Photos of <%= @place.name %></h2>
+    <div class="row">
+    <% @place.photos.each do |photo| %>  
+    
+      <div class="col-sm-4">
+        <div class="card">
+          <%= image_tag photo.picture, class: 'card-img-top' %>
+          <div class="card-body">
+            <p class="card-text"><%= photo.caption %></p>
+          </div>
         </div>
       </div>
+    
+    <% end %>
     </div>
-  </div>
   <% end %>
 
   <br />
